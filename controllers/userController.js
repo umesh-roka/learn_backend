@@ -64,3 +64,33 @@ export const userSignUp = async (req, res) => {
 
 
 }
+
+
+
+
+export const userUpdate = async (req, res) => {
+  const { email, password, username } = req.body;
+const {id} = req.params;
+  try {
+    const isExist = await User.findOne({ email: email });
+
+    if (isExist){
+      
+
+      await User.findByIdAndUpdate(id,{
+       usernaem:req.body?.username|| isExist.username,
+       email:req.body?.email || isExist.email
+      });
+      return res.status(201).json({ status: 'success', message: 'successfully registered' });
+    } 
+    else{
+      return res.status(400).json({ status: 'error', message: 'user already exist' });
+
+    }
+   
+  } catch (err) {
+    return res.status(400).json(`${err}`);
+  }
+
+
+}

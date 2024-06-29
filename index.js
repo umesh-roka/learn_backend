@@ -14,6 +14,7 @@ const app = express();
 
 mongoose.connect('mongodb+srv://umesh79:magar123@cluster0.fxuyzvs.mongodb.net/Shops').then((val) => {
 
+
   app.listen(port, () => {
     console.log('connected server is running');
   })
@@ -25,7 +26,9 @@ app.use(fileUpload({
   limits: { fileSize: 5 * 1024 * 1024 },
   // abortOnLimit: true
 }));
+
 app.use(express.json());
+
 app.use('/uploads', express.static('uploads'));
 
 
